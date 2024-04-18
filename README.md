@@ -1,0 +1,2 @@
+# Sistem-Pengelolaan-Keuangan-dengan-Metode-Envelope-Budgeting
+Proyek ini merupakan penugasan akhir dari mata kuliah PBO. Program ini memungkinkan seseorang untuk mengelola keuangannya dengan mengalokasikan uang sesuai dengan kebutuhan pokok, sekunder, dan tersier. Selanjutnya setiap uang hanya boleh dikeluarkan berdasarkan kebutuhan yang sesuai. Sisa uang di akhir bulan akan menjadi tabungan di kebutuhan itu.
