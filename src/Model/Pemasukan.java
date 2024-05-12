@@ -6,7 +6,7 @@ public class Pemasukan extends Anggaran {
     private double totalPemasukan;
     private String sumber;
 
-    public Pemasukan(double totalAnggaran, Date tanggal, String deskripsi, double totalPemasukan, String sumber) {
+    public Pemasukan(double totalPemasukan, String Sumber, double totalAnggaran,Date tanggal String sumber) {
         super(totalAnggaran, tanggal, deskripsi);
         this.totalPemasukan = totalPemasukan;
         this.sumber = sumber;
