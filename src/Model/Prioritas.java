@@ -1,48 +1,66 @@
-package sistemkeuangan;
+package sistembudgeting.Model;
 
 public class Prioritas {
-    private double persenPokok;
-    private double persenSekunder;
-    private double persenTersier;
+    private Pemasukan pemasukan;
+    private final double persenPokok = 50.0;
+    private final double persenSekunder = 30.0;
+    private final double persenTersier = 20.0;
 
-    public Prioritas(double persenPokok, double persenSekunder, double persenTersier) {
-        this.persenPokok = persenPokok;
-        this.persenSekunder = persenSekunder;
-        this.persenTersier = persenTersier;
+    public Prioritas(Pemasukan pemasukan) {
+        this.pemasukan = pemasukan;
     }
 
-    // getter methods
+    // Getter methods
+    public Pemasukan getPemasukan() {
+        return pemasukan;
+    }
+
     public double getPersenPokok() {
-        return this.persenPokok;
+        return persenPokok;
     }
 
     public double getPersenSekunder() {
-        return this.persenSekunder;
+        return persenSekunder;
     }
 
     public double getPersenTersier() {
-        return this.persenTersier;
+        return persenTersier;
     }
 
-    // setter methods
-    public void setPersenPokok(double persenPokok) {
-        this.persenPokok = persenPokok;
+    // Setter methods
+    public void setPemasukan(Pemasukan pemasukan) {
+        this.pemasukan = pemasukan;
     }
 
-    public void setPersenSekunder(double persenSekunder) {
-        this.persenSekunder = persenSekunder;
-    }
-
-    public void setPersenTersier(double persenTersier) {
-        this.persenTersier = persenTersier;
-    }
-
-    // method to calculate total pemasukan based on priorities
-    public double hitungTotalPemasukan(double totalPemasukan) {
-        double totalPokok = (this.persenPokok / 100) * totalPemasukan;
-        double totalSekunder = (this.persenSekunder / 100) * totalPemasukan;
-        double totalTersier = (this.persenTersier / 100) * totalPemasukan;
+    // Method untuk menghitung total pemasukan berdasarkan prioritasnya
+    public double hitungTotalPemasukan() {
+        double totalPemasukan = pemasukan.getTotalPemasukan();
+        double totalPokok = (persenPokok / 100) * totalPemasukan;
+        double totalSekunder = (persenSekunder / 100) * totalPemasukan;
+        double totalTersier = (persenTersier / 100) * totalPemasukan;
 
         return totalPokok + totalSekunder + totalTersier;
     }
-}
+
+    // Method untuk menambah pengeluaran
+    public void addPengeluaran(double jumlah, String jenis) {
+        double totalPemasukan = pemasukan.getTotalPemasukan();
+
+        switch (jenis.toLowerCase()) {
+            case "pokok":
+                if (jumlah > (persenPokok / 100) * totalPemasukan) {
+                    throw new IllegalArgumentException("Jumlah pengeluaran pokok melebihi batas");
+                }
+                break;
+            case "sekunder":
+                if (jumlah > (persenSekunder / 100) * totalPemasukan) {
+                    throw new IllegalArgumentException("Jumlah pengeluaran sekunder melebihi batas");
+                }
+                break;
+            case "tersier":
+                if (jumlah > (persenTersier / 100) * totalPemasukan) {
+                    throw new IllegalArgumentException("Jumlah pengeluaran tersier melebihi batas");
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Jenis pengeluaran tidak dikenal");
